@@ -34,13 +34,12 @@ def callback(ch, method, properties, body):
         # between the max and min values in the deque is greater than or equal to 15.
         # If the condition is met, the code prints a message indicating that the smoker temp has decreased by 15 degrees or more
         if first_deque and max(first_deque)-min(first_deque)>7:
-            print("Patient Alert! Troponin has increased by 7 or more in last hour")
+            print("Alert: Troponin has increased by 7 or more in last hour")
 
     # Acknowledge that the message has been processed and can be removed from the queue    
     except ValueError:
         pass
     ch.basic_ack(delivery_tag=method.delivery_tag)
-    
 
 # define a main function to run the program
 def main(hn: str = "localhost", qn: str = "task_queue"):
@@ -104,7 +103,4 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
     # call the main function with the information needed
-    main('localhost', 'patient1')
     main('localhost', 'patient2')
-    main('localhost', 'patient3')
-    main('localhost', 'patient4')
