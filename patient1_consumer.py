@@ -27,6 +27,7 @@ def callback(ch, method, properties, body):
     reading_string=body.decode()
     # Split the reading_string variable using the split() method
     # Retrieve the second element (index 1) assigned to the 'temp' variable
+    
     try:
         patient=reading_string.split(",")[1]
         first_deque.append(float(patient))
@@ -35,11 +36,24 @@ def callback(ch, method, properties, body):
         # If the condition is met, the code prints a message indicating that the smoker temp has decreased by 15 degrees or more
         if first_deque and max(first_deque)-min(first_deque)>7:
             print("Alert: Troponin has increased by 7 or more in last hour")
+        ch.basic_ack(delivery_tag=method.delivery_tag)
 
     # Acknowledge that the message has been processed and can be removed from the queue    
     except ValueError:
         pass
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+  
+    try:
+        patient = reading_string.split(",")[1]
+        troponin_level = float(patient)
+        first_deque.append(troponin_level)
+        if troponin_level >= 30:
+            print("Alert: Troponin level is 30 or higher")
+        elif first_deque and max(first_deque) - min(first_deque) > 7:
+            print("Alert: Troponin has increased by 7 or more in last hour")
+        ch.basic_ack(delivery_tag=method.delivery_tag)
+
+    except ValueError:
+        pass
 
 # define a main function to run the program
 def main(hn: str = "localhost", qn: str = "task_queue"):
