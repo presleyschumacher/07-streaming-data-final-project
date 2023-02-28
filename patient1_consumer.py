@@ -105,3 +105,6 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
 if __name__ == "__main__":
     # call the main function with the information needed
     main('localhost', 'patient1')
+    main('localhost', 'patient2')
+    main('localhost', 'patient3')
+    main('localhost', 'patient4')
