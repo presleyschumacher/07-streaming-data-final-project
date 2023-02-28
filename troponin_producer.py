@@ -64,7 +64,7 @@ def send_message():
     
             # set the variables for reach column in the row
             for row in reader:
-                Time,patient1,patient2,patient3 = row
+                Time,patient1,patient2,patient3, patient4 = row
 
                 # For Smoker, Food_A, and Food_B, the below steps will be followed:
                 # use the round() function to round 2 decimal places
