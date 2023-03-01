@@ -8,55 +8,48 @@
 ### Name:  Presley Schumacher
 ### Date:  February 21, 2023
 """
+from functools import partial
 import pika
 import sys
 import time
 from collections import deque
 
-#Declare Deque
-# 1 reading every 60 seconds
-# 60 min * 1 / 60 = Max length of 1
-# Comparing the most recent reading to the last 1 received
-first_deque = deque(maxlen=1) 
+# Declare deque to store troponin readings for the last hour
+# A reading is taken every hour the max. length is 24
+# The deque will hold 24 readings to cover the full day's worth of data
+troponin_readings = deque(maxlen=24)
 
 # define a callback function to be called when a message is received
 def callback(ch, method, properties, body):
-    """ Define behavior on getting a message."""
-    # Message is decoded from bytes to a string using decode()
-    print(f" [x] Received {body.decode()}")
-    reading_string=body.decode()
-    # Split the reading_string variable using the split() method
-    # Retrieve the second element (index 1) assigned to the 'temp' variable
-    
+    # Decode the message from bytes to string and split it by comma
+    message = body.decode()
+    parts = message.split(",")
     try:
-        patient=reading_string.split(",")[1]
-        first_deque.append(float(patient))
-        # If there are elements in smoker_deque the code checks if the difference
-        # between the max and min values in the deque is greater than or equal to 15.
-        # If the condition is met, the code prints a message indicating that the smoker temp has decreased by 15 degrees or more
-        if first_deque and max(first_deque)-min(first_deque)>7:
-            print("Alert: Troponin has increased by 7 or more in last hour")
-        ch.basic_ack(delivery_tag=method.delivery_tag)
+        # Extract the troponin level from the message and convert it to float
+        troponin_level = float(parts[1])
+        # Add the troponin level to the deque
+        troponin_readings.append(troponin_level)
 
-    # Acknowledge that the message has been processed and can be removed from the queue    
-    except ValueError:
-        pass
-  
-    try:
-        patient = reading_string.split(",")[1]
-        troponin_level = float(patient)
-        first_deque.append(troponin_level)
-        if troponin_level >= 30:
+        # Check if the deque has any readings and if the difference
+        # between the max and min values in the deque is greater than or equal to 7.
+        # If the condition is met, print a message indicating that the troponin level
+        # has increased by 7 or more in the last hour
+        if troponin_readings and max(troponin_readings) - min(troponin_readings) >= 7:
+            print("Alert: Troponin level has increased by 7 or more in the last hour")
+
+        if (troponin_readings) and troponin_readings[-1] >= 30:
             print("Alert: Troponin level is 30 or higher")
-        elif first_deque and max(first_deque) - min(first_deque) > 7:
-            print("Alert: Troponin has increased by 7 or more in last hour")
+        
+        # Acknowledge that the message has been processed and can be removed from the queue
         ch.basic_ack(delivery_tag=method.delivery_tag)
-
+    except IndexError:
+        print("Error: Message does not contain troponin level")
     except ValueError:
-        pass
-
+        print("Error: Troponin level is not a valid float")
+    
+  
 # define a main function to run the program
-def main(hn: str = "localhost", qn: str = "task_queue"):
+def main(hn: str = "localhost", qn: str = "patient2"):
     """ Continuously listen for task messages on a named queue."""
 
     # when a statement can go wrong, use a try-except block
