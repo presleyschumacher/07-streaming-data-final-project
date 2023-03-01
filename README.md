@@ -19,11 +19,7 @@ The final project for Streaming Data
 ## Background
 Troponin is a protein in the heart muscle that regulates heart muscle contractions. A troponin test is a laboratory test that measures troponin levels in the blood. Troponin levels found in the blood is often an indicator of heart damage.
 
-Normally, there is no troponin circulating in the blood. However, when the heart muscle cells sustain damage, it releases troponin. The more damage to the heart muscle cells, the higher the troponin levels will go.
-
-A troponin test measures three components of the troponin complex. There are two different kinds of troponin tests: regular and high-sensitivity.
-
-A high-sensitivity cardiac troponin T (hscTnT) test has a general cutoff to rule out heart damage. The cutoff level is 10 nanograms per liter (ng/L) or lower for females. The level is 15 ng/L or lower for males.
+Normally, there is no troponin circulating in the blood. However, when the heart muscle cells sustain damage, it releases troponin. The more damage to the heart muscle cells, the higher the troponin levels will go. A high-sensitivity cardiac troponin T (hscTnT) test has a general cutoff to rule out heart damage. The cutoff level is 10 nanograms per liter (ng/L) or lower for females. The level is 15 ng/L or lower for males.
 
 The main cause of elevated troponin level is injury to the heart muscle, specifically a heart attack. However, there are several other cardiac conditions that can damage the heart or reduce blood flow, and thus, result in an increase in troponin levels. These conditions include, but are not limited to:
 *	Cardiomyopathy
@@ -32,11 +28,9 @@ The main cause of elevated troponin level is injury to the heart muscle, specifi
 *	Sepsis
 *	Stroke
 
-The assessment of patients with acute chest pain in the emergency room is a time-consuming diagnostic challenge. Recently, it’s been shown that measurements of the cardiac-specific proteins Troponin T and Troponin I are superior to conventional measurement for the detection of minor myocardial injury.
+The assessment of patients with acute chest pain in the emergency room is a time-consuming diagnostic challenge. Recently, it’s been shown that measurements of the cardiac-specific proteins Troponin T and Troponin I are superior to conventional measurement for the detection of even minor injury to the heart.
 
 The use of troponin measurements in the emergency room is impaired by the limited availability of analytic techniques and long turnover times.
-
-There are newly developed bedside test kits that provide qualitative results within 15 to 20 minutes. Studies have shown that these tests, while not yet perfect, result in more accurate diagnoses than do previous, more-time consuming methods and allow safer and more rapid decision making for patients with critical chest pain.
 
 ## The Project
 
@@ -46,7 +40,7 @@ After reading about CGM’s, I started thinking about potential devices that cou
 
 This led to researching heart attacks, damage to the heart, and heart failure.
 
-What if there was a monitor, similar to the CGM, that tested troponin levels periodically and sent alerts to doctor’s when numbers increased at certain intervals and/or were at or above certain levels that indicated heart damage was suspected.
+What if there was a monitor, similar to the CGM, that tested troponin levels periodically and sent alerts to doctor’s when numbers increased at certain intervals and/or were at or above certain levels that may indicate heart damage?
 
 I created a fake data set to monitor 4 patients in 24 hours. Their troponin levels were read once every hour and monitored for changes. Patient_troponin_levels.csv has 4 columns:
 * [0] Time = Date-time stamp for the sensor
@@ -60,12 +54,50 @@ We want to know if:
 1. A patient’s troponin levels increased by 7 or more ng/l in the last hour and/or
 1. A patient’s troponin levels were at or above 30 ng/l
 
-I came up with which alerts to set from this inforgraphic from the "Troponin fact sheet for Primary Care" from the Department of Clinical Biochemistry. A general guidance on what levels indicate mmyocardial infarction (MI), or heart attack.
+I came up with which alerts to set from this inforgraphic from the "Troponin fact sheet for Primary Care" from the Department of Clinical Biochemistry. A general guidance on the ranges of troponin in the blood that may suggest myocardial infarction (MI), or heart attack.
 
-![image](https://user-images.githubusercontent.com/105391626/222035403-cf37ffc1-f7ec-4303-9d3f-8a10002e04d8.png)
+![0](https://user-images.githubusercontent.com/105391626/222038771-94380cb3-32f8-4a1f-acca-6af21a4ddd37.jpeg)
 
-My dataset tells 3 stories:
-    1. Patient 1's levels are low and consistent. Doesn't indicate any reason for alarm
-    2. Patient 2's levels increases quickly and gets pretty high. I only entered 10 rows of data for patient 2 to imply that there was 
+https://www.nbt.nhs.uk/sites/default/files/Trop%20w%20%20header.pdf
 
+#### My dataset tells 4 stories:
+1. Patient 1 levels are low and consistent. Doesn't indicate any reason for alarm
+2. Patient 2 levels increases quickly and gets pretty high. I only entered 10 rows of data for patient 2 to imply that the numbers increased high enough and quick enough there was some kind of intervention happening.
+3. Patient 3 levels remained  relatively low for most of the 24 hours and then begin to increase quickly and suddenly.
+4. Patient 4 levels were mostly random. Both high and low at times to show the importance of monitoring because sometimes you don't always know what will happen.
 
+## The Significance
+* 10-15% of heart attack patients die before arriving at the hospital and 10% die at the hospital. 
+* Patients who receive early treatment have better prognosis. If there is a large area of damaged heart muscle, the patient may have prolonged health complications.
+* With each passing minute after a heart attack, more heart tissue loses oxygen and deteriorates or dies.
+* Timely treatment of a heart attack is vital. 
+* If there is something that can help in the early detection and, therefore, early intervention of a heart attack then more patients may have a better chance at living a longer, healthier life.
+
+## Sources
+https://www.rabbitmq.com
+https://www.medicinenet.com/high_sensitivity_troponin_test_ranges_and_values/article.htm
+https://www.healthgrades.com/right-care/heart-health/troponin-levels?tpc=latest-news
+https://www.bangkokhearthospital.com/en/content/heart-attack-early-diagnosis-and-treatment-can-save-your-life
+https://my.clevelandclinic.org/health/drugs/11444-glucose-continuous-glucose-monitoring
+
+## Screenshots
+
+### Producer
+![troponin_producer](https://user-images.githubusercontent.com/105391626/222039679-bc5a6b56-2075-4e0c-aca1-8bad68fe9c3c.png)
+
+### Patient 1 Consumer
+![patient1_Consumer](https://user-images.githubusercontent.com/105391626/222039712-1ddafc2c-c273-4be2-b08d-a0cea5a6d799.png)
+
+### Patient 2 Consumer
+![patient2_consumer](https://user-images.githubusercontent.com/105391626/222039749-11ce6815-31f5-4b8c-9bbe-74cba93aab6f.png)
+
+### Patient 3 Consumer
+![patient3_consumer](https://user-images.githubusercontent.com/105391626/222040541-249f7a04-08ae-4ce6-bb81-a708d44ab64e.png)
+
+### Patient 4 Consumers
+![patient4_consumer](https://user-images.githubusercontent.com/105391626/222040566-c951a811-d9d4-4e81-a437-d917b2f646d8.png)
+
+### RabbitMQ Admin Site
+![frontpage](https://user-images.githubusercontent.com/105391626/222040678-9e4b48e3-365f-493d-b610-b62547ed56cb.png)
+
+![Blank 4 Grids Collage](https://user-images.githubusercontent.com/105391626/222040647-fe175866-a433-47ca-ac33-5e3e2ddc51ad.png)
