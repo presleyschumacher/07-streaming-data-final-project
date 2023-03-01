@@ -36,11 +36,11 @@ The use of troponin measurements in the emergency room is impaired by the limite
 
 I did some reading about Continuous Glucose Monitoring (CGM) which are devices that help manage Type 1 and Type 2 diabetes. A sensor is placed just under your skin that measures your glucose levels for 24 hours. A transmitter sends results to a device or cell phone. This allows the person with the GCM to receive data that shows blood sugar level changes over time; allows for their healthcare provider to review the patient’s data for personalized care; and the device sends alerts when glucose levels rise or fall allowing the patient to make changes quickly.
 
-After reading about CGM’s, I started thinking about potential devices that could monitor other health concerns more closely to detect problems and provide early intervention to prevent further damage to the body or even death.
+After reading about CGMs, I started thinking about other potential devices that could monitor other health concerns more closely to detect problems and provide early intervention to prevent further damage to the body or even death.
 
-This led to researching heart attacks, damage to the heart, and heart failure.
+This led to my researching heart attacks, damage to the heart, and heart failure.
 
-What if there was a monitor, similar to the CGM, that tested troponin levels periodically and sent alerts to doctor’s when numbers increased at certain intervals and/or were at or above certain levels that may indicate heart damage?
+What if there was a monitor, similar to the CGM, that tested troponin levels periodically and sent alerts to doctors when numbers increased at certain intervals and/or were at or above certain levels that may indicate heart damage?
 
 I created a fake data set to monitor 4 patients in 24 hours. Their troponin levels were read once every hour and monitored for changes. Patient_troponin_levels.csv has 4 columns:
 * [0] Time = Date-time stamp for the sensor
@@ -67,9 +67,8 @@ https://www.nbt.nhs.uk/sites/default/files/Trop%20w%20%20header.pdf
 4. Patient 4 levels were mostly random. Both high and low at times to show the importance of monitoring because sometimes you don't always know what will happen.
 
 ## The Significance
-* 10-15% of heart attack patients die before arriving at the hospital and 10% die at the hospital. 
-* Patients who receive early treatment have better prognosis. If there is a large area of damaged heart muscle, the patient may have prolonged health complications.
-* With each passing minute after a heart attack, more heart tissue loses oxygen and deteriorates or dies.
+* 10-15% of heart attack patients die before arriving at the hospital. 10% of heart attack patients die at the hospital. 
+* With each passing minute after a heart attack, more heart tissue loses oxygen and deteriorates or dies. If there is a large area of damaged heart muscle, the patient may have prolonged health complications.
 * Timely treatment of a heart attack is vital. 
 * If there is something that can help in the early detection and, therefore, early intervention of a heart attack then more patients may have a better chance at living a longer, healthier life.
 
