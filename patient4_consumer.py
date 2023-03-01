@@ -53,7 +53,7 @@ def callback(ch, method, properties, body):
     
   
 # define a main function to run the program
-def main(hn: str = "localhost", qn: str = "patient2"):
+def main(hn: str = "localhost", qn: str = "patient4"):
     """ Continuously listen for task messages on a named queue."""
 
     # when a statement can go wrong, use a try-except block
@@ -114,4 +114,4 @@ def main(hn: str = "localhost", qn: str = "patient2"):
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
     # call the main function with the information needed
-    main('localhost', 'patient2')
+    main('localhost', 'patient4')

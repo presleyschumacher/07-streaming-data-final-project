@@ -1,7 +1,10 @@
 """
     This program sends a message to a queue on the RabbitMQ server from a CSV File to create alert notifications.
-    We are simulating a streaming series of temperature readings from the smoker and 2 different food temperatures
-    In the producer, below, we are sending these temperature readings to RabbitMQ
+    We are simulating a streaming series of measurements from 4 different patient's in the hospital
+    which have monitors hooked up to them reading their troponin levels
+    
+    In the producer, below, we are sending these measurements to RabbitMQ
+
     Author: Presley Schumacher
     Date: February 14, 2023
 """
@@ -66,12 +69,12 @@ def send_message():
             for row in reader:
                 Time,patient1,patient2,patient3, patient4=row
 
-                # For Smoker, Food_A, and Food_B, the below steps will be followed:
-                # use the round() function to round 2 decimal places
-                # use the float() function to convert the string to a float
-                # use an fstring to create a message from our data
-                # prepare a binary message to stream
-                # use the channel to publish a message to the queue
+                # For the data from the 4 patients, the below steps will be followed:
+                    # use the round() function to round 2 decimal places
+                    # use the float() function to convert the string to a float
+                    # use an fstring to create a message from our data
+                    # prepare a binary message to stream
+                    # use the channel to publish a message to the queue
 
                 try:
                     patient1 = (float(patient1))
@@ -127,5 +130,7 @@ if __name__ == "__main__":
     offer_rabbitmq_admin_site('True')
     # Send Message
     send_message()
-    # sleep should be for 30 seconds as the assignment calls
+
+   # Since the readings are taken every hour, time.sleep should be set to 3600 (number of seconds in an hour)
+   # For time purposes while testing the producer and consumers, the time.sleep will be set to 30 seconds.
     time.sleep(30)
