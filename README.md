@@ -1,2 +1,71 @@
 # 07-streaming-data-final-project
 The final project for Streaming Data
+> Use RabbitMQ to create 1 producer and 4 consumers that will be used to monitor data from patients with sensors monitoring their troponin levels. Read one value every hour.
+
+## Before You Begin
+- [x] Fork this starter repo into your GitHub.
+- [x] Clone your repo down to your machine.
+- [x] View / Command Palette - then Python: Select Interpreter
+- [x] Select your conda environment. 
+
+## Prerequisites
+* RabbitMQ Server running
+* Pika
+* Sys
+* Webbrowser
+* CSV
+* Time
+
+## Background
+Troponin is a protein in the heart muscle that regulates heart muscle contractions. A troponin test is a laboratory test that measures troponin levels in the blood. Troponin levels found in the blood is often an indicator of heart damage.
+
+Normally, there is no troponin circulating in the blood. However, when the heart muscle cells sustain damage, it releases troponin. The more damage to the heart muscle cells, the higher the troponin levels will go.
+
+A troponin test measures three components of the troponin complex. There are two different kinds of troponin tests: regular and high-sensitivity.
+
+A high-sensitivity cardiac troponin T (hscTnT) test has a general cutoff to rule out heart damage. The cutoff level is 10 nanograms per liter (ng/L) or lower for females. The level is 15 ng/L or lower for males.
+
+The main cause of elevated troponin level is injury to the heart muscle, specifically a heart attack. However, there are several other cardiac conditions that can damage the heart or reduce blood flow, and thus, result in an increase in troponin levels. These conditions include, but are not limited to:
+*	Cardiomyopathy
+*	Heart failure
+*	Kidney Failure
+*	Sepsis
+*	Stroke
+
+The assessment of patients with acute chest pain in the emergency room is a time-consuming diagnostic challenge. Recently, it’s been shown that measurements of the cardiac-specific proteins Troponin T and Troponin I are superior to conventional measurement for the detection of minor myocardial injury.
+
+The use of troponin measurements in the emergency room is impaired by the limited availability of analytic techniques and long turnover times.
+
+There are newly developed bedside test kits that provide qualitative results within 15 to 20 minutes. Studies have shown that these tests, while not yet perfect, result in more accurate diagnoses than do previous, more-time consuming methods and allow safer and more rapid decision making for patients with critical chest pain.
+
+## The Project
+
+I did some reading about Continuous Glucose Monitoring (CGM) which are devices that help manage Type 1 and Type 2 diabetes. A sensor is placed just under your skin that measures your glucose levels for 24 hours. A transmitter sends results to a device or cell phone. This allows the person with the GCM to receive data that shows blood sugar level changes over time; allows for their healthcare provider to review the patient’s data for personalized care; and the device sends alerts when glucose levels rise or fall allowing the patient to make changes quickly.
+
+After reading about CGM’s, I started thinking about potential devices that could monitor other health concerns more closely to detect problems and provide early intervention to prevent further damage to the body or even death.
+
+This led to researching heart attacks, damage to the heart, and heart failure.
+
+What if there was a monitor, similar to the CGM, that tested troponin levels periodically and sent alerts to doctor’s when numbers increased at certain intervals and/or were at or above certain levels that indicated heart damage was suspected.
+
+I created a fake data set to monitor 4 patients in 24 hours. Their troponin levels were read once every hour and monitored for changes. Patient_troponin_levels.csv has 4 columns:
+* [0] Time = Date-time stamp for the sensor
+* [1] patient1 = The first patient’s troponin levels --> send to message queue “patient1”
+* [2] patient2 = The second patient’s troponin levels --> send to message queue “paitent2”
+* [3] patient3 = The third patient’s troponin levels --> send to message queue “patient3” 
+* [4] patient4 = The fourth patient’s troponin levels --> send to message queue “patient4”
+
+#### Significant Events
+We want to know if:
+1. A patient’s troponin levels increased by 7 or more ng/l in the last hour and/or
+1. A patient’s troponin levels were at or above 30 ng/l
+
+I came up with which alerts to set from this inforgraphic from the "Troponin fact sheet for Primary Care" from the Department of Clinical Biochemistry. A general guidance on what levels indicate mmyocardial infarction (MI), or heart attack.
+
+![image](https://user-images.githubusercontent.com/105391626/222035403-cf37ffc1-f7ec-4303-9d3f-8a10002e04d8.png)
+
+My dataset tells 3 stories:
+    1. Patient 1's levels are low and consistent. Doesn't indicate any reason for alarm
+    2. Patient 2's levels increases quickly and gets pretty high. I only entered 10 rows of data for patient 2 to imply that there was 
+
+
