@@ -34,10 +34,10 @@ def callback(ch, method, properties, body):
         # between the max and min values in the deque is greater than or equal to 7.
         # If the condition is met, print a message indicating that the troponin level
         # has increased by 7 or more in the last hour
-        if troponin_readings and max(troponin_readings) - min(troponin_readings) >= 7:
+        if len(troponin_readings) >= 2 and max(troponin_readings) - min(troponin_readings) >= 7:
             print("Alert: Troponin level has increased by 7 or more in the last hour")
 
-        if (troponin_readings) and troponin_readings[-1] >= 30:
+        if troponin_level >= 30:
             print("Alert: Troponin level is 30 or higher")
         
         # Acknowledge that the message has been processed and can be removed from the queue
