@@ -17,9 +17,7 @@ The final project for Streaming Data
 * Time
 
 ## Background
-Troponin is a protein in the heart muscle that regulates heart muscle contractions. A troponin test is a laboratory test that measures troponin levels in the blood. Troponin levels found in the blood is often an indicator of heart damage.
-
-Normally, there is no troponin circulating in the blood. However, when the heart muscle cells sustain damage, it releases troponin. The more damage to the heart muscle cells, the higher the troponin levels will go. A high-sensitivity cardiac troponin T (hscTnT) test has a general cutoff to rule out heart damage. The cutoff level is 10 nanograms per liter (ng/L) or lower for females. The level is 15 ng/L or lower for males.
+Troponin is a protein in the heart muscle that regulates heart muscle contractions. A troponin test is a laboratory test that measures troponin levels in the blood. Normally, there is no troponin circulating in the blood. However, when the heart muscle cells sustain damage, it releases troponin. The more damage to the heart muscle cells, the higher the troponin levels will go. A high-sensitivity cardiac troponin T (hscTnT) test has a general cutoff to rule out heart damage. The cutoff level is 10 nanograms per liter (ng/L) or lower for females. The level is 15 ng/L or lower for males.
 
 The main cause of elevated troponin level is injury to the heart muscle, specifically a heart attack. However, there are several other cardiac conditions that can damage the heart or reduce blood flow, and thus, result in an increase in troponin levels. These conditions include, but are not limited to:
 *	Cardiomyopathy
